@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aether Premium - Tahlil va Admin Dashboard</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+  <!-- Style CSS -->
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="admin-page">
+  <!-- Glowing Background Orbs -->
+  <div class="glow-orb orb-1"></div>
+  <div class="glow-orb orb-2"></div>
+
+  <!-- Login Modal Overlay (Auth) -->
+  <div class="login-overlay" id="login-overlay">
+    <div class="login-box">
+      <div class="logo">
+        <span class="logo-icon"><i class="fa-solid fa-lock"></i></span>
+        <span class="logo-text">Aether<span>Admin</span></span>
+      </div>
+      <h2>Tizimga kirish</h2>
+      <p>Dashboardni ko'rish uchun admin parolini kiriting</p>
+      
+      <form id="login-form">
+        <div class="form-group">
+          <label for="admin-password">Admin Paroli</label>
+          <div class="password-input-wrapper">
+            <input type="password" id="admin-password" placeholder="••••••••" required>
+            <button type="button" id="toggle-password-btn"><i class="fa-solid fa-eye"></i></button>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Kirish</button>
+        <p class="error-msg" id="login-error-msg"></p>
+      </form>
+    </div>
+  </div>
+
+  <!-- Main Dashboard Container -->
+  <div class="dashboard-container" id="dashboard-container" style="display: none;">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="logo">
+        <span class="logo-icon"><i class="fa-solid fa-cube"></i></span>
+        <span class="logo-text">Aether<span>Dashboard</span></span>
+      </div>
+      
+      <nav class="sidebar-nav">
+        <ul>
+          <li><a href="#" class="active" data-tab="analytics"><i class="fa-solid fa-chart-pie"></i> Analytics</a></li>
+          <li><a href="#" data-tab="products"><i class="fa-solid fa-box-open"></i> Mahsulotlar</a></li>
+          <li><a href="#" data-tab="orders"><i class="fa-solid fa-receipt"></i> Buyurtmalar <span class="badge-count" id="pending-orders-badge" style="display: none;">0</span></a></li>
+          <li><a href="#" data-tab="settings"><i class="fa-solid fa-sliders"></i> Sozlamalar</a></li>
+        </ul>
+      </nav>
+
+      <div class="sidebar-footer">
+        <button id="logout-btn" class="btn btn-secondary btn-block"><i class="fa-solid fa-right-from-bracket"></i> Chiqish</button>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      <!-- Top Bar -->
+      <header class="topbar">
+        <div class="topbar-title">
+          <h1 id="page-title">Tahlillar paneli</h1>
+          <p id="page-subtitle">Statistika, faoliyat va tizim holati.</p>
+        </div>
+        
+        <div class="topbar-actions">
+          <div class="bot-status-indicator" id="bot-status-container">
+            <span class="status-dot"></span>
+            <span class="status-label">Bot: Yuklanmoqda...</span>
+          </div>
+          <a href="/" class="btn btn-secondary"><i class="fa-solid fa-globe"></i> Saytni ko'rish</a>
+        </div>
+      </header>
+
+      <!-- TAB 1: ANALYTICS -->
+      <section class="tab-section active" id="tab-analytics">
+        <!-- Metrics Grid -->
+        <div class="metrics-grid">
+          <div class="metric-card">
+            <div class="metric-info">
+              <span class="metric-title">Jami foydalanuvchilar</span>
+              <h3 class="metric-value" id="metric-users">0</h3>
+              <p class="metric-sub">Bot a'zolari soni</p>
+            </div>
+            <div class="metric-icon"><i class="fa-solid fa-users"></i></div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-info">
+              <span class="metric-title">Jami buyurtmalar</span>
+              <h3 class="metric-value" id="metric-orders">0</h3>
+              <p class="metric-sub">Sotib olish so'rovlari</p>
+            </div>
+            <div class="metric-icon"><i class="fa-solid fa-shopping-cart"></i></div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-info">
+              <span class="metric-title">Jami ko'rishlar</span>
+              <h3 class="metric-value" id="metric-views">0</h3>
+              <p class="metric-sub">Veb-saytdagi mahsulot ko'rishlar</p>
+            </div>
+            <div class="metric-icon"><i class="fa-solid fa-eye"></i></div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-info">
+              <span class="metric-title">Mahsulotlar soni</span>
+              <h3 class="metric-value" id="metric-products">0</h3>
+              <p class="metric-sub">Katalogdagi mahsulotlar</p>
+            </div>
+            <div class="metric-icon"><i class="fa-solid fa-tags"></i></div>
+          </div>
+        </div>
+
+        <!-- Charts Grid -->
+        <div class="charts-grid">
+          <div class="chart-card">
+            <h3>Foydalanuvchilar o'sish dinamikasi (Oxirgi 7 kun)</h3>
+            <div class="chart-container">
+              <canvas id="usersChart"></canvas>
+            </div>
+          </div>
+          <div class="chart-card">
+            <h3>Mashhur Mahsulotlar (Top ko'rilganlar)</h3>
+            <div class="popular-products-list" id="popular-products-container">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 2: PRODUCTS -->
+      <section class="tab-section" id="tab-products">
+        <div class="tab-header">
+          <h2>Mahsulotlarni boshqarish</h2>
+          <button class="btn btn-primary" id="add-product-btn"><i class="fa-solid fa-plus"></i> Yangi mahsulot qo'shish</button>
+        </div>
+        
+        <div class="products-table-container">
+          <table class="dashboard-table">
+            <thead>
+              <tr>
+                <th>Rasm</th>
+                <th>Nomi</th>
+                <th>Narxi</th>
+                <th>Ko'rishlar</th>
+                <th>Harakatlar</th>
+              </tr>
+            </thead>
+            <tbody id="admin-products-tbody">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- TAB 3: ORDERS -->
+      <section class="tab-section" id="tab-orders">
+        <div class="tab-header">
+          <h2>Buyurtmalar tarixi</h2>
+        </div>
+
+        <div class="orders-table-container">
+          <table class="dashboard-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Sana</th>
+                <th>Mijoz</th>
+                <th>Mahsulot</th>
+                <th>Narxi</th>
+                <th>Holat</th>
+                <th>Harakatlar</th>
+              </tr>
+            </thead>
+            <tbody id="admin-orders-tbody">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- TAB 4: SETTINGS -->
+      <section class="tab-section" id="tab-settings">
+        <div class="tab-header">
+          <h2>Tizim va Telegram Bot sozlamalari</h2>
+        </div>
+
+        <div class="settings-card">
+          <form id="settings-form">
+            <div class="form-group">
+              <label for="settings-token">Telegram Bot Token</label>
+              <input type="text" id="settings-token" required>
+              <p class="form-help">@BotFather orqali olingan bot tokenini kiriting.</p>
+            </div>
+            
+            <div class="form-group">
+              <label for="settings-admin-id">Admin Telegram ID</label>
+              <input type="text" id="settings-admin-id" required>
+              <p class="form-help">Xabarlar va buyurtma so'rovlari yuboriladigan Telegram hisobingiz IDsi. @userinfobot orqali bilib olish mumkin.</p>
+            </div>
+
+            <div class="form-group">
+              <label for="settings-admin-username">Admin Telegram Username (ixtiyoriy)</label>
+              <input type="text" id="settings-admin-username" placeholder="masalan: jurabek_admin">
+              <p class="form-help">Mijozlar to'lov uchun bog'lanishlari mumkin bo'lgan Telegram loginingiz (masalan: `t.me/username` sifatida ochiladi). Username yozilmasa, to'g'ridan-to'g'ri profil ID-ga havola beriladi.</p>
+            </div>
+
+            <div class="form-group">
+              <label for="settings-webapp-url">Veb-sayt (Render) Havolasi</label>
+              <input type="text" id="settings-webapp-url" placeholder="masalan: https://kosmetika-bot.onrender.com/">
+              <p class="form-help">Loyihangiz Render.com ga yuklangandan keyingi veb-saytingiz havolasi. Bu havola Telegram bot ichidagi <b>🛍️ Do'kon</b> tugmasini ochish uchun ishlatiladi.</p>
+            </div>
+
+            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-save"></i> O'zgarishlarni saqlash</button>
+            <span class="settings-status-msg" id="settings-status-msg"></span>
+          </form>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Product Form Modal (Add / Edit) -->
+  <div class="modal-overlay" id="product-form-modal">
+    <div class="modal-content admin-modal">
+      <button class="close-modal-btn" id="close-form-modal"><i class="fa-solid fa-xmark"></i></button>
+      <h2 id="modal-form-title">Yangi mahsulot qo'shish</h2>
+      <form id="product-form">
+        <input type="hidden" id="form-product-id">
+        
+        <div class="form-group">
+          <label for="form-product-title">Mahsulot Nomi</label>
+          <input type="text" id="form-product-title" required placeholder="masalan: Zenith VPN Premium">
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label for="form-product-price">Narxi</label>
+            <input type="text" id="form-product-price" required placeholder="masalan: 120,000 UZS / oy">
+          </div>
+          <div class="form-group">
+            <label for="form-product-image">Rasm Havolasi (URL)</label>
+            <input type="text" id="form-product-image" placeholder="https://images.unsplash.com/... yoki bo'sh qoldiring">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="form-product-desc">Batafsil Tavsif</label>
+          <textarea id="form-product-desc" rows="4" required placeholder="Mahsulotning xususiyatlari, tezligi va afzalliklari haqida batafsil ma'lumot yozing..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="form-product-usage">Nima uchun ishlatiladi? (Qo'llanilishi)</label>
+          <textarea id="form-product-usage" rows="3" required placeholder="Mijoz nima maqsadda ishlatishi, qanday muammoni hal qilishi haqida yozing..."></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block" id="form-submit-btn">Saqlash</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="/js/admin.js"></script>
+</body>
+</html>

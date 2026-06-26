@@ -1,0 +1,6 @@
+{
+  "name": "Dilnoza Koreya",
+  "description": "Premium Koreya Kosmetikasi – go'zallik va sifat sirlari siz uchun",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

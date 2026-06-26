@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aether Premium - Premium Mahsulotlar Katalogi</title>
+  <meta name="description" content="Aether Premium Store - Yuqori sifatli dasturiy ta'minotlar va premium raqamli xizmatlar portali.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Style CSS -->
+  <link rel="stylesheet" href="/css/style.css">
+  <!-- Telegram WebApp SDK -->
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body class="home-page">
+  <!-- Glowing Background Orbs -->
+  <div class="glow-orb orb-1"></div>
+  <div class="glow-orb orb-2"></div>
+  <div class="glow-orb orb-3"></div>
+
+  <!-- Header -->
+  <header>
+    <div class="container navbar">
+      <div class="logo" id="site-logo">
+        <span class="logo-icon"><i class="fa-solid fa-cube"></i></span>
+        <span class="logo-text">Aether<span>Premium</span></span>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#hero">Asosiy</a></li>
+          <li><a href="#catalog">Katalog</a></li>
+          <li><a href="#about">Biz haqimizda</a></li>
+        </ul>
+      </nav>
+      <div class="nav-buttons">
+        <a href="/admin.html" class="btn btn-secondary"><i class="fa-solid fa-chart-line"></i> Admin Panel</a>
+        <a id="header-bot-btn" href="#" target="_blank" class="btn btn-primary"><i class="fa-brands fa-telegram"></i> Telegram Bot</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="hero" class="hero-section">
+    <div class="container hero-content">
+      <div class="badge">
+        <span class="badge-icon"><i class="fa-solid fa-sparkles"></i></span>
+        <span>Kelajak Texnologiyalari Portali</span>
+      </div>
+      <h1 class="hero-title">Eksklyuziv Raqamli Mahsulotlar & Xizmatlar</h1>
+      <p class="hero-subtitle">Bizning premium platformamiz orqali dunyo darajasidagi raqamli vositalar, VPN xizmatlari va sun'iy intellekt texnologiyalaridan foydalaning. Mahsulotlarni ko'ring va Telegram botimiz orqali bir zumda buyurtma bering.</p>
+      <div class="hero-actions">
+        <a href="#catalog" class="btn btn-primary btn-lg">Katalogga o'tish <i class="fa-solid fa-arrow-down-long"></i></a>
+        <a id="hero-bot-btn" href="#" target="_blank" class="btn btn-glass btn-lg"><i class="fa-brands fa-telegram"></i> Botni ishga tushirish</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Grid -->
+  <section class="stats-section">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-card">
+          <span class="stat-num">99.9%</span>
+          <span class="stat-label">Ishlash barqarorligi</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num">24/7</span>
+          <span class="stat-label">Qo'llab-quvvatlash</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num">100%</span>
+          <span class="stat-label">Xavfsiz va shaffof to'lovlar</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Catalog Section -->
+  <section id="catalog" class="catalog-section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Premium Mahsulotlar Katalogi</h2>
+        <p class="section-subtitle">Har bir mahsulot unumdorlik va qulaylikni oshirish uchun maxsus ishlab chiqilgan. Batafsil ma'lumot olish uchun mahsulot kartasini ko'rib chiqing.</p>
+      </div>
+
+      <!-- Products Grid -->
+      <div class="products-grid" id="products-container">
+        <!-- Dynamic products will be inserted here -->
+        <div class="loading-spinner">
+          <i class="fa-solid fa-circle-notch fa-spin"></i> Mahsulotlar yuklanmoqda...
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="about-section">
+    <div class="container about-container">
+      <div class="about-text">
+        <div class="badge">Biz haqimizda</div>
+        <h2>Nima uchun aynan biz?</h2>
+        <p>Aether Premium - bu yuqori sifatli raqamli yechimlar va xizmatlarni taqdim etadigan zamonaviy platforma. Biz foydalanuvchilarimizga faqat eng yaxshi, sinalgan va yuqori darajada himoyalangan mahsulotlarni taklif qilamiz.</p>
+        
+        <div class="about-features">
+          <div class="feature-item">
+            <span class="feature-icon"><i class="fa-solid fa-shield-halved"></i></span>
+            <div>
+              <h3>Shaffof To'lovlar</h3>
+              <p>Xaridlar to'g'ridan-to'g'ri adminning shaxsiy Telegram sahifasi orqali amalga oshiriladi, bu esa to'lov jarayonining 100% ishonchli va shaffof bo'lishini ta'minlaydi.</p>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon"><i class="fa-solid fa-bolt"></i></span>
+            <div>
+              <h3>Tezkor Yetkazib Berish</h3>
+              <p>Xarid tasdiqlanishi bilan sizga barcha kirish ma'lumotlari yoki litsenziya kalitlari Telegram bot orqali avtomatik yuboriladi.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="about-visual">
+        <div class="visual-card">
+          <i class="fa-solid fa-microchip"></i>
+          <h4>Avtomatlashtirilgan Tizim</h4>
+          <p>Bizning maxsus Telegram botimiz sizga buyurtmalaringiz holatini kuzatish va xizmatlarni boshqarish imkonini beradi.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Product Detail Modal -->
+  <div class="modal-overlay" id="product-modal">
+    <div class="modal-content">
+      <button class="close-modal-btn" id="close-modal"><i class="fa-solid fa-xmark"></i></button>
+      <div class="modal-body" id="modal-content-body">
+        <!-- Dynamic content goes here -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-content">
+      <div class="footer-info">
+        <div class="logo">
+          <span class="logo-icon"><i class="fa-solid fa-cube"></i></span>
+          <span class="logo-text">Aether<span>Premium</span></span>
+        </div>
+        <p>Kelajak texnologiyalari va raqamli innovatsiyalar portali. Barcha huquqlar himoyalangan.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Tezkor havolalar</h4>
+        <ul>
+          <li><a href="#hero">Asosiy</a></li>
+          <li><a href="#catalog">Katalog</a></li>
+          <li><a href="/admin.html">Tahlil va Admin panel</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Aether Premium. Crafted by Antigravity with ❤️</p>
+    </div>
+  </footer>
+
+  <script src="/js/main.js"></script>
+</body>
+</html>
